@@ -21,4 +21,10 @@ public class HelloWorldController {
     	logger.info("invoke HelloWorldController # sayHello");
         return "Hello,World!";
     }
+    
+    @RequestMapping("/hi")
+    public String sayHi() {
+    	logger.info("invoke HelloWorldController # sayHi");
+        return "Hi,World!";
+    }
 }

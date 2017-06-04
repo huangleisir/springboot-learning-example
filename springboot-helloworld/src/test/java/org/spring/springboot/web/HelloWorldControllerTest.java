@@ -17,6 +17,7 @@ public class HelloWorldControllerTest {
     @Test
     public void testSayHello() {
     	logger.info(new HelloWorldController().sayHello());
+    	logger.info(new HelloWorldController().sayHi());
       //  assertEquals("Hello,World!",new HelloWorldController().sayHello());
     }
 }
