@@ -1,6 +1,8 @@
 package org.spring.springboot;
 
+import org.spring.springboot.domain.City;
 import org.spring.springboot.dubbo.CityDubboConsumerService;
+import org.spring.springboot.dubbo.CityDubboService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

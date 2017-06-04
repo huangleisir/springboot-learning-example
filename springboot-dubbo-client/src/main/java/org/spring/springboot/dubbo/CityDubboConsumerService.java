@@ -2,6 +2,7 @@ package org.spring.springboot.dubbo;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.spring.springboot.domain.City;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class CityDubboConsumerService {
 
     @Reference(version = "1.0.0")
+ //   @Autowired
     CityDubboService cityDubboService;
 
     public void printCity() {
