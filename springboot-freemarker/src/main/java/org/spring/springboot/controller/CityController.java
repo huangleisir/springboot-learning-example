@@ -1,5 +1,7 @@
 package org.spring.springboot.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.springboot.domain.City;
 import org.spring.springboot.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 @Controller
 public class CityController {
-
+	private static final Logger logger = LoggerFactory.getLogger(CityController.class);
     @Autowired
     private CityService cityService;
 
@@ -28,7 +30,14 @@ public class CityController {
 
     @RequestMapping(value = "/api/city", method = RequestMethod.GET)
     public String findAllCity(Model model) {
-        List<City> cityList = cityService.findAllCity();
+    	List<City> cityList = null;
+    	try{
+    		 cityList = cityService.findAllCity();
+    	}catch(Exception e){
+    		logger.error("服务异常，不好意思");
+    		return "服务异常，不好意思";
+    	}
+        
         model.addAttribute("cityList",cityList);
         return "cityList";
     }
