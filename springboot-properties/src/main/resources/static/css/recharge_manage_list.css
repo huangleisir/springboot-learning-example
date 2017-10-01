@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+#modal{
+	min-width: 500px !important;
+	max-width: 500px !important;
+}
+#add{
+	min-width: 80px !important;
+	max-width: 80px !important;
+	margin-bottom: 5px;
+	float: right;
+}
+.query,.update,.delete{
+	margin-right: 10px;
+}

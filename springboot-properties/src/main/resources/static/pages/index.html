@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>创建营销活动</title>
+<script type="text/javascript" src="src/main/resources/static/js/jquery-2.0.3.min.js"></script>
+<style type="text/css">
+	.bg_white{background:white;}
+	li .w100per{width:100%;display:block;}
+</style>
+</head>
+<body>
+	<!-- 基本配置 -->
+	<!--<script type="text/javascript" src="template/setting.js"></script>-->
+	<link type="text/css" href="../css/xh_manage.css" rel="stylesheet" />
+	<!--<script type="text/javascript" src="js/xh_config.js"></script>-->
+	<!--<script type="text/javascript" src="js/xh_manage.js"></script>-->
+
+	
+			<div class="">
+				<ul class="xh-search w100per bg_white" style="background:white;">
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活动名称：</span>
+						<input type="text" id="act_name" class="w250px"/>
+					</li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;营销工具：</span>
+						<input type="radio"  name="mkt_tool"  value="1" checked="checked" />充值优惠
+					</li>
+					<li>
+						<span>充值优惠形式：</span>
+						<input type="radio"  name="mkt_style"  value="1"  />满减
+						<input type="radio" name="mkt_style" value="0"  />满送
+					</li>
+					<li>
+						<span>优惠计算方式：</span>
+						<input type="radio"  name="cal_way"  value="1"  />赠送指定金额
+						<input type="radio" name="cal_way" value="2"  />赠送指定比例
+					</li>
+					<li  >
+						<span>开启阶梯优惠：</span>
+						<input type="radio"  name="is_ladder_reduct"  value="1"  />是
+						<input type="radio" name="is_ladder_reduct" checked="checked" value="0"  />否
+					</li>
+					<li id="fixed_reduct_li"  >
+						<span>固定优惠设置：</span>
+						<input name="" placeholder="设置最低充值金额"  />&nbsp;<span>元</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input style="" name="scale" placeholder="设置优惠比例"  />&nbsp;<span name="per_scale"></span>
+					</li>
+					<li id="ladder_reduct_li" class="disp_none" style="height: 180px;" >
+						<span>阶梯优惠设置：</span> <span class="fc-gray">请合理设置梯度范围，最多设置6个梯度。</span><br/>
+						<div>
+							<input style="margin-left: 105px;margin-top: 10px;"  name=""   />&nbsp;<span>元</span>-
+						<input name="scale"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span><a name="addLadder" class="fc-red hand">&nbsp;&nbsp;&nbsp;添加</a> 
+						</div>
+						
+						<div class="disp_none">
+							<input style="margin-left: 105px;margin-top: 10px;"  name=""   />&nbsp;<span >元</span>-
+						<input name="scale"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span><a class="fc-red hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-red hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						</div>
+						
+						<div class="disp_none">
+							<input style="margin-left: 105px;margin-top: 10px;"  name=""   />&nbsp;<span >元</span>-
+						<input name="scale"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span><a class="fc-red hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-red hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						</div>
+						
+						<div class="disp_none">
+							<input style="margin-left: 105px;margin-top: 10px;"  name=""   />&nbsp;<span >元</span>-
+						<input name="scale"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span><a class="fc-red hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-red hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						</div>
+						
+						<div class="disp_none">
+							<input style="margin-left: 105px;margin-top: 10px;"  name=""   />&nbsp;<span >元</span>-
+						<input name="scale"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span><a class="fc-red hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-red hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						</div>
+						
+						<div class="disp_none">
+							<input style="margin-left: 105px;margin-top: 10px;"  name=""   />&nbsp;<span >元</span>-
+						<input name="scale"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span> <a name="delLadder" class="fc-red hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						</div>
+						
+					</li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活动时间：</span>
+						<span>&nbsp;&nbsp;</span><input type="datetime-local" id="startTime"/> <span>----</span> <input type="datetime-local" id="endTime"/>
+					</li>
+					<li>
+						<span>参与活动业务：</span>
+						<span><input type="radio"  name="act_type" checked="checked"  value="1"  />充值</span>
+					</li>
+					<li id="channel_li">
+						<span>&nbsp;&nbsp;&nbsp;投放渠道号：</span>
+						<span>
+							<input name="channel_way" placeholder="请输入渠道号" />&nbsp;&nbsp;&nbsp;<a class="fc-red hand" name="add_channel">添加</a>
+							 
+						</span>
+						
+					</li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;成本承担方：</span>
+						<span><input   name="merchant_no" placeholder="请输入商户号"  /></span>  </span>
+					</li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;活动预算：</span>
+						<span><input   name="budget"    /> 元 </span>
+					</li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;预算阈值：</span>
+						<span><input   name="threshold"  v  />&nbsp;元  </span>
+					</li>
+					<li>
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阈值告警：</span>
+						<span><input   name="contact_no" placeholder="请输入告警人手机号"    />  </span>
+					</li>
+					<li>
+						<span>是否开启浮条：</span>
+						<input type="radio"  name="float_bar"  value="1"  />是
+						<input type="radio" name="float_bar" value="0"  />否
+					</li>
+					<li id="float_bar_text_li" class="disp_none">
+						<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浮条文案：</span>
+						<input  name="float_bar_text"    />
+					</li>
+					<li id="float_bar_link_li" class="disp_none">
+						<span>浮条链接地址：</span>
+						<input  name="float_bar_link" class="w350px"    />
+					</li>
+					<!--<li>
+						<span>创建时间：</span><input type="date" id="startTime"/>
+					</li>
+					<li>
+						<span>至</span><input type="date" id="endTime"/>
+					</li>
+					
+					<li>
+						<span>收款人名称：</span>
+						<input type="text" id="receiveName"  class="xh-textinp w60 mr-10"/>
+					</li>-->
+					<!--<li>
+						<span>状态：</span>
+						<select id="billState" class="xh-select w40 mr-10">
+							<option value="">请选择类型</option>
+							<option value="0">待打款</option>
+							<option value="1">已打款</option>
+							<option value="2">打款失败</option>
+							<option value="3">已拒绝</option>
+							<option value="4">认证成功</option>
+							<option value="5">认证失败</option>
+						</select>
+					</li>-->
+					<li style="height:30px;">
+						<input style="margin-left: 60px;" id="search_accinfobtn"  class="xh-submit w10 bc-orange-1 fc-white" type="button" value="下一步" onclick="loadBill()" />
+					</li>
+				</ul>
+					
+			</div>
+	
+</body>
+<script type="text/javascript">
+		  $('input[name="cal_way"]').click(function(){
+		  	if($(this).val() == '1'){
+		  		$("span[name='per_scale']").each(function(index,data){ 
+				$(data).html('元');
+		  	});
+		  	}else if($(this).val() == '2'){
+		  		$("span[name='per_scale']").each(function(index,data){ 
+				$(data).html('%');
+		  	});
+
+		  	}
+		  	
+		  	
+		  	
+		  	
+  });
+  
+  $('input[name="float_bar"]').click(function(){
+		  	if($(this).val() == '1'){
+		  	$('#float_bar_text_li').removeClass('disp_none');
+		  	$('#float_bar_link_li').removeClass('disp_none');
+		  	}else if($(this).val() == '0'){
+		  		$('#float_bar_text_li').addClass('disp_none');
+		  		$('#float_bar_link_li').addClass('disp_none');
+		  	}
+	});
+	
+	$('input[name="is_ladder_reduct"]').click(function(){
+		  	if($(this).val() == '1'){
+			  	$('#ladder_reduct_li').removeClass('disp_none');
+			  	$('#fixed_reduct_li').addClass('disp_none');
+		  	}else if($(this).val() == '0'){
+		  		$('#fixed_reduct_li').removeClass('disp_none');
+		  		$('#ladder_reduct_li').addClass('disp_none');
+		  	}
+	});
+	
+	$('a[name="addLadder"]').click(function(){
+		$(this).parent().next().removeClass("disp_none");
+		$(this).addClass("disp_none");
+		$(this).next().addClass("disp_none");
+	});
+	
+	$('a[name="delLadder"]').click(function(){
+		$(this).parent().addClass("disp_none");
+		$(this).parent().prev().find("a").removeClass("disp_none");
+	});
+	
+	$('a[name="add_channel"]').click(function(){
+		
+		$(this).parent().parent().append('<br/><span class="ml120px"><input name="channel_way" placeholder="请输入渠道号"/>&nbsp;&nbsp;&nbsp;<a  onclick="addChannel(this)" class="fc-red hand" name="add_channel">添加</a>	&nbsp;&nbsp;&nbsp; <a onclick="delChannel(this)" class="fc-red hand" name="del_channel">删除</a>	</span>');
+		$(this).parent().find("a").addClass("disp_none");
+	});
+	
+	function addChannel(obj){
+		$(obj).parent().find("a").addClass("disp_none");
+		$('#channel_li').append('<br/><span class="ml120px"><input name="channel_way" placeholder="请输入渠道号"/>&nbsp;&nbsp;&nbsp;<a  onclick="addChannel(this)" class="fc-red hand" name="add_channel">添加</a>	&nbsp;&nbsp;&nbsp; <a onclick="delChannel(this)" class="fc-red hand" name="del_channel">删除</a>	</span>');
+	}
+	
+	function delChannel(obj){
+		$(obj).parent().prev().prev().find("a").removeClass("disp_none");
+		$(obj).parent().prev().remove();
+		$(obj).parent().remove();
+	}
+	
+		
+	</script>
+</html>

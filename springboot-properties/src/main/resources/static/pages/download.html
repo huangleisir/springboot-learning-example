@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="../css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+<link href="../css/datepicker.css" rel="stylesheet" />
+<link href="../css/bootstrap.min.css" rel="stylesheet" />
+<link href="../css/font-awesome.min.css" rel="stylesheet" />
+<link href="../css/ace.min.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="../css/bootstrap.min.css" rel="stylesheet" />
+<link href="../assets/css/font-awesome.min.css"  rel="stylesheet" />
+<link href="../assets/css/ace.min.css"  rel="stylesheet" />
+<link href="../css/bootstrap-table.min.css"  rel="stylesheet" />
+<link href="../css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
+<!-- 基本配置 -->
+<link type="text/css" href="../css/xh_manage.css" rel="stylesheet" />
+<link type="text/css" href="../css/market.css" rel="stylesheet" />
+<!-- <style type="text/css">
+	.bg_white{
+		background:white;
+	}
+	li .w100per{
+		width:100%;
+		display:block;
+	}
+	 #modal{
+		min-width: 500px !important;
+		max-width: 500px !important;
+	} 
+</style> -->
+</head>
+<body>
+	<div >
+	<ul>
+	   <li id ="activity_name_li" style="margin-top: 50px;">
+						<span class="col-sm-title">活动名称：</span>
+						<input type="text" id="activity_name" class="w250px"/>
+					</li> <br/>
+           
+          <li id="creat_time_li" >
+						<span class="col-sm-title" style="float:left">领用时间：</span>
+						<div class="col-sm-2">
+						<div class="input-group">
+							<input  id="creat_startTime" type="text">
+							<span id="btn_creat_startTime" class="input-group-addon" style="padding:4px 12px">
+								<i class="icon-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div>
+					<br/><br/>
+						<label class="control-label no-padding-right" style="margin-left: 60px;"">至</label>
+						<div class="col-sm-2">
+						<div class="input-group">
+							<input  style="margin-left: 178px;"id="creat_endTime"  type="text">
+							<span id="btn_creat_endTime" class="input-group-addon" style="padding:4px 12px">
+								<i class="icon-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div>
+					</li>  
+					<br/><br/>
+           <li style="height:30px"  id="download_li">
+			<input style="margin-left: 170px;" id="download"  class="xh-submit w10 bc-orange-1 fc-white" type="button" value="下载" onclick="download()" />
+			 <input style="margin-left: 50px;" id="close"  class="xh-submit w10 bc-orange-1 fc-white" type="button" value="取消" data-dismiss="modal" aria-hidden="true" />
+		 </li> 
+		 </ul> 
+	</div>
+</body>
+<!-- 时间插件 -->
+<script src="../js/jquery-2.0.3.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/bootstrap-table.min.js"></script>
+<script src="../js/bootstrap-table-zh-CN.js"></script>
+<script src="../js/check.js"></script>
+<script src="../assets/js/ace.min.js"></script>
+<!-- 时间插件 -->
+<script type="text/javascript" src="../assets/js/date-time/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../assets/js/date-time/bootstrap-datetimepicker.zh-CN.js"></script>
+<!-- 弹框 -->
+<script src="../js/dialog.js"></script>
+<!--加载框 -->
+<script src="../js/load.js"></script>
+<!-- 弹框 -->
+<script src="../assets/js/bootbox.min.js"></script>
+<!-- 业务js -->
+<script src="../js/commfun_coms.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/activity/crt_act.js?v=0001"></script>
+</html>

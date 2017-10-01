@@ -1,0 +1,531 @@
+<head>
+<meta charset="UTF-8">
+<title>营销活动配置</title>
+<link href="../css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+<link href="../css/datepicker.css" rel="stylesheet" />
+<link href="../css/bootstrap.min.css" rel="stylesheet" />
+<link href="../css/font-awesome.min.css" rel="stylesheet" />
+<link href="../css/ace.min.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="../assets/css/font-awesome.min.css"  rel="stylesheet" />
+<link href="../assets/css/ace.min.css"  rel="stylesheet" />
+<link href="../css/bootstrap-table.min.css"  rel="stylesheet" />
+<link href="../css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+
+<!-- 基本配置 -->
+<link type="text/css" href="../css/xh_manage.css" rel="stylesheet" />
+<link type="text/css" href="../css/market.css" rel="stylesheet" />
+<style type="text/css">
+	.bg_white{
+		background:white;
+	}
+	li .w100per{
+		width:100%;
+		display:block;
+	}
+	#modal{
+		min-width: 500px !important;
+		max-width: 500px !important;
+	}
+</style>
+</head>
+<body style="background-color: white;">
+
+<div  id="breadcrumbs">
+			<ul class="breadcrumb">
+				<li>
+					<i class="icon-home home-icon"></i>
+					<a href="javascript:void(0)">营销系统</a>
+				</li>
+				<li class="active">营销活动配置</li>
+			</ul>
+		</div>
+		
+			<div class="" >
+				<ul class="xh-search w100per bg_white" style="background:white;">
+		<li class="disp_none"  id="txt_li">
+		    <!-- <span class="col-sm-title" style="float:left">发放及使用情况：</span> -->
+		    <label class="grey-lable"></label>
+				<label class="text-lable">发放及使用情况</label>
+				</li>
+		<li class="disp_none"  id="coupleTable_li">
+			<div class="table" style="margin-top: 20px;">
+	            <table class="tc" id="tableCoupon" width="600" border="1">
+	                  <tr><td>优惠券总量</td><td>未领取数量</td><td>已领取数量</td></tr>
+	                  <tr>
+	                  <td><span id="couponTotals"></span></td>
+	                  <td><span id="notReceiveNum"></span></td>
+	                  <td><span id="receiveNum"></span></td>
+	            </table>
+              </div>
+              </li>
+          <li class="disp_none"  id="redpacketTable_li">
+			<div class="table" style="margin-top: 20px;">
+	            <table class="tc" id="tableRedpacket" width="600" border="1">
+	                  <tr><td>红包总量</td><td>未领取数量</td><td>已领取数量</td><td>当前预算余额</td></tr>
+	                  <tr>
+	                  <td><span id="redpacketTotals"></span></td>
+	                  <td><span id="notReceiveRedpacketNum"></span></td>
+	                  <td><span id="receiveRedpacketNum"></span></td>
+	                  <td><span id="nowMarketBudget"></span></td></tr>
+	            </table>
+              </div>
+              </li>
+              <li class="disp_none"  id="rechargeTable_li">
+			<div class="table" style="margin-top: 20px;">
+	            <table class="tc" id="tableRecharge" width="600" border="1">
+	                  <tr><td>预算</td><td>预算余额</td></tr>
+	                  <tr>
+	                  <td><span id="marketBudget1"></span></td>
+	                  <td><span id="nwMarketBudget"></span></td></tr>
+	            </table>
+              </div>
+              </li>
+              <li class="disp_none"  id="download_li">
+               <div>
+			        <button id="downLoad" class="btn btn-purple btn-sm" type="button" data-title="下载"  href="javascript:void(0)"data-width="500" data-remote="download.html">
+			        	详细记录下载
+			        	<i class="icon-download icon-on-right bigger-110"></i>
+			        </button>
+			        <input style="margin-left: 60px;" id="update"  class="btn btn-purple btn-sm" type="button" value="刷新" onclick="update()" />
+			   </div>
+			    </li>
+			     <li>
+			         <label class="grey-lable" ></label>
+				     <label class="text-lable" >基础规则</label>
+			     </li>
+			    <!-- </ul>
+			    <ul style="background:white;margin-top: 10px;">
+             <li>
+				<label style="background:#D8D8D8;width:15%;text-align:center;margin-left: 60px;height:30px;">1.基础规则</label>
+			</li>
+				</ul>
+	<ul class="xh-search w100per bg_white" style="background:white;"> -->
+					<li readonly>
+						<span class="col-sm-title" >活动名称：</span>
+						<input type="text" id="act_name" class="w250px"/>
+						<lable class="lable"><label class="disp_none"  id="actName_lable" >*请输入活动名称！</label></lable>
+						<lable class="lable"><label class="disp_none"  id="actNameLength_lable" >*活动名称最多18字！</label></lable>
+					</li>
+					<li>
+						<span class="col-sm-title" style="float:left">活动时间：</span>
+						<div class="col-sm-1 col-sm-date">
+							<div class="input-group" style="width: 100%;">
+								<input  class="form-control date-picker" style="height: 26px;" id="startTime"  type="text" >
+								<span id="btn_startTime" class="input-group-addon" style="padding:4px 12px">
+									<i  class="icon-calendar bigger-110"></i>
+								</span>
+							</div>
+						</div>
+						<label class="control-label no-padding-right" style="float:left;">至</label>
+						<div class="col-sm-1 col-sm-date">
+							<div class="input-group" style="width: 100%;">
+								<input class="form-control date-picker" style="height: 26px;" id="endTime"  type="text">
+								<span id="btn_endTime" class="input-group-addon" style="padding:4px 12px">
+									<i  class="icon-calendar bigger-110"></i>
+								</span>
+							</div>
+						</div>
+						<lable class="lable"><label class="disp_none"  id="actStaEnd_lable" >*请输入活动开始和结束时间！</label></lable>
+						<lable class="lable"><label class="disp_none"  id="actStaNow_lable" >*活动开始时间不能早于当前时间！</label></lable>
+						<lable class="lable"><label class="disp_none"  id="actStaEndCp_lable" >*活动开始时间不能大于结束时间！</label></lable>
+					</li>
+					<br/>
+					<li>
+						<span class="col-sm-title">营销工具：</span>
+						<input type="radio"  name="mkt_tool" class="mr20"  value="1" checked="checked" />充值优惠
+					  	<input type="radio"  name="mkt_tool"    value="2"  />优惠券  
+					  	<input type="radio"  name="mkt_tool"    value="3"  />红包 
+					</li><!-- </ul>
+					<ul style="margin-top: 20px;">
+					<li><label style="background:#D8D8D8;width:15%;text-align:center;margin-left: 60px;height:30px;">2.优惠规则</label></li>
+					</ul>
+					<ul class="xh-search w100per bg_white" style="background:white;"> -->
+					<li>
+			    <label class="grey-lable" ></label>
+				<label class="text-lable">优惠规则</label>
+			        </li>
+					<li id="distriTypeLi" class="disp_none" >
+						<span class="col-sm-title">投放方式：</span>
+						<span id= "distriType_1" ><input id="distriType1" type="radio"  name="distriType"   value="1" />直接投放</span> 
+					    <span id= "distriType_2" ><input id="distriType2" type="radio"  name="distriType"   value="2"  />领用 </span>
+					  	<span id= "distriType_3" ><input id="distriType3" type="radio"  name="distriType" class="mr20"    value="3"  />注册送</span>
+					  	<span id= "distriType_4" ><input id="distriType4" type="radio"  name="distriType" class="mr20"    value="4"  />关联微信公众号送</span>
+					  	<span id= "distriType_5" ><input id="distriType5" type="radio"  name="distriType" class="mr20"    value="5"  />首次开通免密支付送</span>
+					</li>
+					<li class="disp_none" id="coupon_name_li">
+						<span class="col-sm-title">优惠券名称：</span>
+						<input type="text" id="coupon_name" class="w250px"/>
+						<lable class="lable"><label class="disp_none"  id="coupon_name_lable0" >*请输入优惠券名称！</label></lable>
+						<lable class="lable"><label class="disp_none"  id="coupon_name_lable1" >*优惠券名称最多18字！</label></lable>
+					</li>
+					<li id="coupon_time_li" class="disp_none">
+						<span class="col-sm-title" style="float:left">券可用时间：</span>
+						 <div class="col-sm-1 col-sm-date">
+							<div class="input-group" style="width: 100%;">
+								<input  class="form-control date-picker" style="height: 26px;" id="coupon_startTime"  type="text" >
+								<span id="btn_coupon_startTime" class="input-group-addon" style="padding:4px 12px">
+									<i  class="icon-calendar bigger-110"></i>
+								</span>
+							</div>
+						</div> 
+						<!-- <div class="col-sm-2">
+						<div class="input-group">
+							<input class="form-control date-picker form_datetime" id="coupon_startTime"  type="text">
+							<span class="input-group-addon">
+								<i class="icon-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div> -->
+						<label class="control-label no-padding-right" style="float:left;">至</label>
+						 <div class="col-sm-1 col-sm-date">
+							<div class="input-group" style="width: 100%;">
+								<input class="form-control date-picker" style="height: 26px;" id="coupon_endTime"  type="text">
+								<span id="btn_coupon_endTime" class="input-group-addon" style="padding:4px 12px">
+									<i  class="icon-calendar bigger-110"></i>
+								</span>
+							</div>
+						</div> 
+						<lable class="lable"><label class="disp_none"  id="coupStaEnd_lable" >*券开始时间应小于结束时间！</label></lable>
+					    <lable class="lable"><label class="disp_none"  id="coupStaActEnd_lable" >*券结束时间应大于活动结束时间后2小时！券结束时间：23:59:59！！</label></lable>
+						<lable class="lable"><label class="disp_none"  id="coupStaEnd_lable0" >*请输入券开始时间和结束时间！</label></lable>
+						<!-- <div class="col-sm-2">
+						<div class="input-group">
+							<input class="form-control date-picker form_datetime" id="coupon_endTime"  type="text">
+							<span class="input-group-addon">
+								<i class="icon-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div> -->
+						<br/>
+					</li> 
+					<li id="favourFormli">
+						<span class="col-sm-title">优惠形式：</span>
+						<input type="radio"  name="favourForm" checked="checked" value="1"  />满减
+						<input type="radio" name="favourForm" value="2"  />满送
+					</li>
+					<li>
+						<span class="col-sm-title">计算方式：</span>
+						<input type="radio"   name="calculateMode" checked="checked" value="1"  />固定金额
+						<span id="zk_span"> <input type="radio" name="calculateMode" value="2"  />折扣  </span>
+					</li>
+					<li id="ladli">
+						<span class="col-sm-title">开启阶梯优惠：</span>
+						<input type="radio"  name="isOpenRank"  value="1"  />是
+						<input type="radio" name="isOpenRank" checked="checked" value="0"  />否
+					</li>
+					<li id="fixed_reduct_li"  >
+						<span class="col-sm-title">固定优惠设置：</span>
+						<input name="" id="minAmount" placeholder="设置最低充值金额"  />&nbsp;<span>元</span>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input id="amt_or_scale"  name="amt_or_scale" placeholder="设置赠送金额"  />&nbsp;<span name="per_scale">元</span>
+						<lable class="lable"><label class="disp_none"  id="minAmount_lable" >*最低充值金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="minAmount1_lable" >*最低充值金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="minAmount2_lable" >*请输入最低充值金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale0" >*请输入优惠金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale1" >*优惠金额应小于最低充值金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale2" >*优惠金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale3" >*优惠金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale4" >*请输入优惠比例!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale5" >*优惠比例应小于100%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale6" >*优惠比例应大于0%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="amt_or_scale7" >*优惠比例格式不正确!</label></lable>
+					</li>
+					<li id="ladder_reduct_li" class="disp_none" >
+						<span class="col-sm-title">阶梯优惠设置：</span> <span class="fc-gray">请合理设置梯度范围，最多设置6个梯度。</span><br/>
+						<div id="lad0" >
+							<input class="lad_begin_amt" id="lad1_start"  name=""   />&nbsp;<span>元</span>-
+						<input id="lad1_end" name="end"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" id="amt_scale1" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span><a name="addLadder" class="fc-black hand">&nbsp;&nbsp;&nbsp;添加</a>
+						<lable class="lable"><label class="disp_none"  id="lad_lable00" ></label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable0" >*请输入阶梯1起止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable1" >*阶梯1起始金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable2" >*阶梯1终止金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable3" >*阶梯1终止金额应大于起始金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable4" >*请输入阶梯1优惠金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable5" >*阶梯1优惠金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable6" >*阶梯1优惠金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable7" >*阶梯1优惠金额应小于优惠范围最大值!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable8" >*请输入阶梯1优惠比例!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable9" >*阶梯1优惠比例应小于100%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable10" >*阶梯1优惠比例应大于0%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad_lable11" >*阶梯1优惠比例格式不正确!</label></lable> 
+						</div>
+						
+						<div id="lad1" class="disp_none">
+							<input id="lad2_start" class="lad_begin_amt" name=""   />&nbsp;<span >元</span>-
+						<input id="lad2_end" name="end"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="scale" id="amt_scale2" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale">元</span><a class="fc-black hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-black hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						<lable class="lable"><label class="disp_none"  id="lad2_lable0" >*请输入阶梯2起止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable1" >*阶梯2起始金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable2" >*阶梯2终止金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable3" >*阶梯2终止金额应大于起始金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable12" >*阶梯2起始金额应等于阶梯1终止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable4" >*请输入阶梯2优惠金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable5" >*阶梯2优惠金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable6" >*阶梯2优惠金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable7" >*阶梯2优惠金额应小于优惠范围最大值!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable8" >*请输入阶梯2优惠比例!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable9" >*阶梯2优惠比例应小于100%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable10" >*阶梯2优惠比例应大于0%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad2_lable11" >*阶梯2优惠比例格式不正确!</label></lable> 
+						</div>
+						
+						<div id="lad2" class="disp_none">
+							<input id="lad3_start"  class="lad_begin_amt"  name=""   />&nbsp;<span >元</span>-
+						<input id="lad3_end" name="end"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="amt_scale3" name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale">元</span><a class="fc-black hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-black hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						<lable class="lable"><label class="disp_none"  id="lad3_lable0" >*请输入阶梯3起止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable1" >*阶梯3起始金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable2" >*阶梯3终止金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable3" >*阶梯3终止金额应大于起始金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable12" >*阶梯3起始金额应等于阶梯2终止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable4" >*请输入阶梯3优惠金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable5" >*阶梯3优惠金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable6" >*阶梯3优惠金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable7" >*阶梯3优惠金额应小于优惠范围最大值!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable8" >*请输入阶梯3优惠比例!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable9" >*阶梯3优惠比例应小于100%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable10" >*阶梯3优惠比例应大于0%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad3_lable11" >*阶梯3优惠比例格式不正确!</label></lable> 
+						
+						</div>
+						
+						<div id="lad3" class="disp_none">
+							<input id="lad4_start" class="lad_begin_amt"  name=""   />&nbsp;<span >元</span>-
+						<input id="lad4_end" name="end"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="amt_scale4" name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale"></span><a class="fc-black hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-black hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						<lable class="lable"><label class="disp_none"  id="lad4_lable0" >*请输入阶梯4起止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable1" >*阶梯4起始金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable2" >*阶梯4终止金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable3" >*阶梯4终止金额应大于起始金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable12" >*阶梯4起始金额应等于阶梯3终止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable4" >*请输入阶梯4优惠金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable5" >*阶梯4优惠金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable6" >*阶梯4优惠金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable7" >*阶梯4优惠金额应小于优惠范围最大值!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable8" >*请输入阶梯4优惠比例!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable9" >*阶梯4优惠比例应小于100%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable10" >*阶梯4优惠比例应大于0%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad4_lable11" >*阶梯4优惠比例格式不正确!</label></lable> 
+						
+						</div>
+						
+						<div id="lad4" class="disp_none">
+							<input id="lad5_start" class="lad_begin_amt"  name=""   />&nbsp;<span >元</span>-
+						<input id="lad5_end" name="end"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="amt_scale5" name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale">元</span><a class="fc-black hand" name="addLadder">&nbsp;&nbsp;&nbsp;添加</a> <a name="delLadder" class="fc-black hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						<lable class="lable"><label class="disp_none"  id="lad5_lable0" >*请输入阶梯5起止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable1" >*阶梯5起始金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable2" >*阶梯5终止金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable3" >*阶梯5终止金额应大于起始金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable12" >*阶梯5起始金额应等于阶梯4终止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable4" >*请输入阶梯5优惠金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable5" >*阶梯5优惠金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable6" >*阶梯5优惠金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable7" >*阶梯5优惠金额应小于优惠范围最大值!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable8" >*请输入阶梯5优惠比例!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable9" >*阶梯5优惠比例应小于100%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable10" >*阶梯5优惠比例应大于0%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad5_lable11" >*阶梯5优惠比例格式不正确!</label></lable> 
+						
+						</div>
+						
+						<div id="lad5" class="disp_none">
+							<input id="lad6_start" class="lad_begin_amt"  name=""   />&nbsp;<span >元</span>-
+						<input id="lad6_end" name="end"   />元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="amt_scale6" name="scale" placeholder="输入优惠金额"  />&nbsp;
+						&nbsp;&nbsp;<span name="per_scale" >元</span> <a name="delLadder" class="fc-black hand">&nbsp;&nbsp;&nbsp;删除</a> 
+						<lable class="lable"><label class="disp_none"  id="lad6_lable0" >*请输入阶梯6起止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable1" >*阶梯6起始金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable2" >*阶梯6终止金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable3" >*阶梯6终止金额应大于起始金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable12" >*阶梯6起始金额应等于阶梯5终止金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable4" >*请输入阶梯6优惠金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable5" >*阶梯6优惠金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable6" >*阶梯6优惠金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable7" >*阶梯6优惠金额应小于优惠范围最大值!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable8" >*请输入阶梯6优惠比例!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable9" >*阶梯6优惠比例应小于100%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable10" >*阶梯6优惠比例应大于0%!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="lad6_lable11" >*阶梯6优惠比例格式不正确!</label></lable> 
+						
+						</div>
+						
+					</li>
+					<li id="single_amt_li" class="disp_none">
+						<span class="col-sm-title">单个发放金额：</span>
+						<span><input id="single_amt" oninput="OnInput(event)" onpropertychange="OnPropChanged (event)"  name="single_amt"   />元</span>
+						<lable class="lable"><label class="disp_none"  id="single_amt_lable0" >*请输入红包金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="single_amt_lable1" >*红包金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="single_amt_lable2" >*红包金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="single_amt_lable3" >*请输入优惠券金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="single_amt_lable4" >*优惠券金额格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="single_amt_lable5" >*优惠券金额应大于0!</label></lable>
+					</li>
+					<li id="coupon_total_li" class="disp_none">
+						<span class="col-sm-title">发放个数：</span>
+						<span><input id="coupon_total" oninput="OnInput(event)" onpropertychange="OnPropChanged (event)"   name="coupon_total"     />个</span>
+						<lable class="lable"><label class="disp_none"  id="coupon_total_lable0" >*请输入发放红包个数!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="coupon_total_lable1" >*红包个数格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="coupon_total_lable4" >*红包个数应大于0!</label></lable>
+					    <lable class="lable"><label class="disp_none"  id="coupon_total_lable2" >*请输入优惠券个数!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="coupon_total_lable3" >*优惠券个数格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="coupon_total_lable5" >*优惠券个数应大于0!</label></lable>
+					</li>
+					<li id="amt_limit_li" class="disp_none">
+						<span class="col-sm-title">订单门槛：</span>
+						<span><input id="cill_amt" name="cill_amt"  placeholder="" value=""  />元及以上金额订单可用</span>
+						<lable class="lable"><label class="disp_none"  id="cill_amt_lable0" >*请输入订单门槛金额!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="cill_amt_lable1" >*订单门槛金额格式不对!</label></lable>
+					    <lable class="lable"><label class="disp_none"  id="cill_amt_lable2" >*订单门槛金额应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="cill_amt_lable3" >*订单门槛应该大于优惠券金额!</label></lable>
+					</li>
+					<li id="product_limit_li" class="disp_none">
+						<span class="col-sm-title">支持商品标识：</span>
+						<span>此版本暂时默认全部商品可用</span>
+					</li>
+					<!-- <li>
+						<span class="col-sm-title">参与活动业务：</span>
+						<span><input type="radio"  name="act_type" checked="checked"  value="1"  /><label id="act_type_label">充值</label></span>
+					</li> -->
+					<!-- </ul>
+					<ul style="margin-top: 20px;">
+					<li><label style="background:#D8D8D8;width:15%;text-align:center;margin-left: 60px;height:30px;">3.其他规则</label></li>
+					</ul>
+					<ul class="xh-search w100per bg_white" style="background:white;"> -->
+					<li>
+			            <label class="grey-lable" ></label>
+				        <label class="text-lable">其他规则</label>
+			        </li>
+					<li   id="channel_li">
+						<span class="col-sm-title">投放渠道号：</span>
+						<span id="marketChannel" >
+						<!-- <input type="checkbox" name="marketChannelAll" id="marketChannelAll"  value="all" class="mr10" />全选 -->
+							<!--  <input type="checkbox" name="marketChannel" value="APP" />APP
+							<input type="checkbox" name="marketChannel" value="ZHTC" />ZHTC
+							<input type="checkbox" name="marketChannel" value="JTC" />JTC
+							<input type="checkbox" name="marketChannel" value="JSH" />JSH
+							<input type="checkbox" name="marketChannel" value="ZLJT" />ZLJT
+							<input type="checkbox" name="marketChannel" value="JST" />JST -->
+						</span>
+					</li>
+					<li id="pay_channel_li">
+						<span class="col-sm-title">指定支付渠道：</span>
+						<span>
+							<input type="checkbox" name="payChannel" value="JYF" />捷易付
+							<input type="checkbox" name="payChannel" value="WeChat" />微信
+							<input type="checkbox" name="payChannel" value="Alipay" />支付宝
+							 
+						</span>
+						
+					</li>
+					<li id="goods_li" class="disp_none">
+						<span class="col-sm-title">支持商品标识：</span>
+						<input type="radio"   name="goods"  value="1"  />单品优惠
+						<span id="zk_span"> <input type="radio" name="goods" checked="checked" value="2"  />全品优惠 </span>
+					</li>
+					<li id="single_goods_li" class="disp_none">
+						<span class="col-sm-title">单品标识id：</span>
+						<span><input id="single_goods"   name="single_goods"   /></span> 
+						<lable class="lable"><label class="disp_none"  id="single_goods_lable0" >*请输入单品标识!</label></lable>
+					</li>
+					<li id="user_max_join_li" class="disp_none">
+						<span class="col-sm-title">用户总领取限制：</span>
+						<span><input id="userMaxJoinTime"   name="userMaxJoinTime"   />个</span> 
+						<lable class="lable"><label class="disp_none"  id="userMaxJoinTime_lable0" >*请输入用户总领取限制个数!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="userMaxJoinTime_lable1" >*用户总领取限制个数格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="userMaxJoinTime_lable2" >*用户总领取限制个数应大于0!</label></lable>
+					</li>
+					<li id="user_day_max_join_li" class="disp_none">
+						<span class="col-sm-title">用户每日领取限制：</span>
+						<span><input id="userDayMaxJoinTime"   name="userDayMaxJoinTime"   />个</span> 
+					    <lable class="lable"><label class="disp_none"  id="userDayMaxJoinTime_lable0" >*请输入用户每日可领取限制个数!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="userDayMaxJoinTime_lable1" >*用户每日可领取限制个数格式不正确!</label></lable>
+					    <lable class="lable"><label class="disp_none"  id="userDayMaxJoinTime_lable2" >*用户每日领取限制应小于用户总领取限制!</label></lable>
+					    <lable class="lable"><label class="disp_none"  id="userDayMaxJoinTime_lable3" >*用户每日领取限制个数应大于0!</label></lable>
+					</li>
+					<li id="refund_li" class="disp_none">
+						<span class="col-sm-title">退款类型：</span>
+						<input type="radio"  name="refund"   value="1" checked="checked" />不支持退款
+					  	<input type="radio"  name="refund"    value="2"  />支持退款,不支持退还优惠券  
+					  	<input type="radio"  name="refund"    value="3"  /> 支持退款,支持退还优惠券 
+					</li>
+					<!-- <li id="refund_lii" class="disp_none">
+						<span class="col-sm-title"></span>
+						<input type="radio"  name="refund1"   value="4" checked="checked" />优惠券消费后三天内可退还     
+					  	<input type="radio"  name="refund1"    value="5"  />优惠券消费后七天内可退还
+					</li> -->
+					<li>
+						<span class="col-sm-title">成本承担方：</span>
+						<span><input id="merchantNo"   name="merchantNo"   /></span> 
+						<lable class="lable"><label class="disp_none"  id="merchantNo_lable" >*请输入成本承担方商号!</label></lable> 
+					</li>
+					<li>
+						<span class="col-sm-title">活动预算：</span>
+						<span><input id="marketBudget"  name="budget"    /> 元 </span>
+						<lable class="lable"><label class="disp_none"  id="marketBudget_lable0" >*活动预算不可为空!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="marketBudget_lable1" >*活动预算应大于0!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="marketBudget_lable2" >*活动预算格式不正确!</label></lable>
+					</li>
+					<li>
+						<span class="col-sm-title">预算阈值：</span>
+						<span><input id="threshold"   name="threshold"   />&nbsp;元  </span>
+						<lable class="lable"><label class="disp_none"  id="threshold_lable0" >*请输入预算阈值!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="threshold_lable1" >*预算阈值格式不正确!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="threshold_lable2" >*预算阈值应小于活动预算!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="threshold_lable3" >*预算阈值应大于0!</label></lable>
+					
+					</li>
+					<li>
+						<span class="col-sm-title">阈值告警人手机号：</span>
+						<span><input id="contact_no"   name="contact_no" maxlength="11" type="text"     />  </span>
+						<lable class="lable"><label class="disp_none"  id="contact_no_lable0" >*请输入阈值告警联系人电话!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="contact_no_lable1" >*请输入正确的阈值告警联系人电话!</label></lable>
+					</li>
+					<li id="float_bar">
+						<span class="col-sm-title">是否开启浮条：</span>
+						<input type="radio"  name="floatBarSwitch"  value="1"  />是
+						<input type="radio" name="floatBarSwitch" value="0" checked="checked"  />否
+					</li>
+					<li id="float_bar_text_li" class="disp_none">
+						<span class="col-sm-title">浮条文案：</span>
+						<input id="floatBarText"  name="floatBarText" class="w350px"   />
+						<lable class="lable"><label class="disp_none"  id="floatBarText_lable0" >*请输入浮条文案!</label></lable>
+					</li> 
+					<li id="float_bar_link_li" class="disp_none">
+						<span class="col-sm-title">浮条链接地址：</span>
+						<input id="floatUrl"  name="float_bar_link" class="w350px"    />
+						<lable class="lable"><label class="disp_none"  id="floatUrl_lable0" >*请输入浮条链接!</label></lable>
+						<lable class="lable"><label class="disp_none"  id="floatUrl_lable1" >*浮条链接不正确!</label></lable>
+					</li>
+					<li style="height:30px;">
+						<input style="margin-left: 60px;" id="submit"  class="xh-submit w10 bc-orange-1 fc-white" type="button" value="提交" onclick="submit()" />
+						<input style="margin-left: 60px;" id="confirm"  class="xh-submit w10 bc-orange-1 fc-white disp_none" type="button" value="确认" onclick="javascript:window.history.back();" value="原窗口打开" />
+						<input style="margin-left: 160px;" id="updateRevise"  class="xh-submit w10 bc-orange-1 fc-white disp_none" type="button" value="修改" onclick="updateRevise()" />
+					</li>
+				</ul>
+					
+			</div>
+		
+</body>
+<!-- 时间插件 -->
+<script src="../js/jquery-2.0.3.min.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/bootstrap-table.min.js"></script>
+<script src="../js/bootstrap-table-zh-CN.js"></script>
+<script src="../js/check.js"></script>
+<script src="../assets/js/ace.min.js"></script>
+<!-- 时间插件 -->
+<script type="text/javascript" src="../assets/js/date-time/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../assets/js/date-time/bootstrap-datetimepicker.zh-CN.js"></script>
+<!-- 弹框 -->
+<script src="../js/dialog.js"></script>
+<!--加载框 -->
+<script src="../js/load.js"></script>
+<!-- 弹框 -->
+<script src="../assets/js/bootbox.min.js"></script>
+<!-- 业务js -->
+<script src="../js/commfun_coms.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/activity/crt_act.js?v=0001"></script>
+	

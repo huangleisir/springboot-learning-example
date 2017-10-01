@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>创建营销活动</title>
+<script type="text/javascript"
+	src="../js/jquery-2.0.3.min.js"></script>
+	<style type="text/css">
+	ul li{list-style-type:none;height:30px;}
+	.disp_none{display:none};
+	</style>
+</head>
+<body>
+	 <ul>
+		<li>
+			<label>活动名称: </label>
+			<span id="act_name"></span>
+		</li> 
+		<li>
+			<label>业务类型: </label>
+			<span id="businessType"></span>
+		</li>
+		<li id=marketBudget class="disp_none">
+			<label>活动预算: </label>
+		</li>
+		<li id=fixedFavourAmt class="disp_none">
+			<label>红包金额: </label>
+		</li>
+		<li id=makeNum class="disp_none">
+			<label>红包数量: </label>
+		</li>
+		<li id="calculateModeLi">
+			<label>计算方式:</label>
+			<span id="calculateMode"></span>
+		</li> 
+		<li id="favourFormLi" >
+			<label>优惠形式:</label>
+			<span id="favourForm"></span>
+		</li>
+		<li id="isOpenRankLi">
+			<label>阶梯优惠:</label>
+			<span id="isOpenRank"></span>
+		</li>
+		<li id="ladder" class="disp_none" >
+			<label>阶梯设置:</label><br/>
+		</li>
+		<li id="fix" class="disp_none" >
+			<label>优惠规则:</label><br/>
+		</li>
+	 </ul>
+</body>
+<script type="text/javascript">
+	$(function (){
+		$('#okBtn').addClass('disp_none');
+		$.ajax({
+			type:"POST",
+			contentType: "application/json",
+			data:JSON.stringify({
+				'id':id,
+				'businessType':businessType
+			}),
+			url:'/market-mgr/market/getRuleInfo',
+			datatype:"JSON",
+			success:function (result){
+				$('#act_name').html(result.data.activityName);
+				if(result.data.businessType == 1){
+					$('#businessType').html('充值优惠');
+					$('#calculateModeLi').after('<li><label>活动预算:</label><span>'+amountFen2Yuan(result.data.marketBudget,2)+'</span>元</li>'+
+							'<li><label>预算阈值:</label><span>'+amountFen2Yuan(result.data.threshold,2)+'</span>元</li>');
+					if(result.data.calculateMode == 1){
+						$('#calculateMode').html('赠送指定金额');
+					}else if(result.data.calculateMode == 2){
+						$('#calculateMode').html('赠送指定比例');
+					}
+					if(result.data.favourForm == 1  ){
+						$('#favourForm').html('满减');
+					}else if(result.data.favourForm == 2){
+						$('#favourForm').html('满送');
+					}
+					if(result.data.isOpenRank == 0){ //固定优惠
+						$('#isOpenRank').html('否');
+						$('#ladder').addClass('disp_none');
+						$('#fix').removeClass('disp_none');
+						if(result.data.calculateMode == 1){
+							$('#fix').append('<span>最低充值金额：'+amountFen2Yuan(result.data.minAmount,2)+'</span>&nbsp;&nbsp;<span>赠送金额：'+amountFen2Yuan(result.data.fixedFavourAmt,2)+'元</span>');	
+						}else if(result.data.calculateMode == 2){
+							$('#fix').append('<span>最低充值金额：'+amountFen2Yuan(result.data.minAmount,2)+'</span>&nbsp;&nbsp;<span>赠送比例：'+result.data.fixedFavourRate*100+'%</span>');
+						}
+						
+						
+					}else if(result.data.isOpenRank == 1){
+						$('#isOpenRank').html('是');
+						$('#ladder').removeClass('disp_none');
+						var tail ='';
+						for(var i = 0 ; i < result.data.deployList.length; i++){
+							var tail ='';
+							if(result.data.calculateMode == 1){
+								$('#calculateMode').html('赠送指定金额');
+								tail = "&nbsp;&nbsp;优惠金额："+amountFen2Yuan(result.data.deployList[i].favourAmount,2)+'元';
+							}else if(result.data.calculateMode == 2){
+								$('#calculateMode').html('赠送指定比例');
+								tail =  "&nbsp;&nbsp;优惠比例："+result.data.deployList[i].favourRate*100+'%';
+							}
+							$('#ladder').append("<span>优惠范围："+amountFen2Yuan(result.data.deployList[i].beginAmount,2)+"</span>元-<span>"+amountFen2Yuan(result.data.deployList[i].endAmount,2)+"</span>元"+tail+"<br/>");
+							
+						}
+					}
+				}else if(result.data.businessType == 2){
+					$('#businessType').html('优惠券');
+					$('#calculateMode').html('赠送指定金额');
+					$('#favourFormLi').addClass('disp_none');
+					$('#isOpenRankLi').addClass('disp_none');
+					$('#ladder').addClass('disp_none');
+					$('#fix').addClass('disp_none');
+					$('#calculateModeLi').after('<li><label>优惠券名称:</label><span>'+result.data.couponName+'</span></li>'+
+							'<li><label>单笔优惠金额:</label><span>'+amountFen2Yuan(result.data.singleAtm,2)+'</span>元</li>'+
+							'<li><label>发放个数:</label><span>'+result.data.couponNum+'</span>个</li>'+
+							'<li><label>订单门槛:</label><span>'+amountFen2Yuan(result.data.amtLimit,2)+'</span>元</li>'+
+							'<li><label>预算阈值:</label><span>'+amountFen2Yuan(result.data.threshold,2)+'</span>元</li>'+
+							'<li><label>预算余额:</label><span>'+amountFen2Yuan((result.data.marketBudget-result.data.discountAmt),2)+'</span>元</li>'+
+							'<li><label>领券时间段:</label><span>'+result.data.sTime+'至'+result.data.eTime+'</span></li>');
+					
+					
+				}else if(result.data.businessType == 3){
+		
+					$('#favourFormLi').addClass('disp_none');
+					$('#calculateModeLi').addClass('disp_none');
+					$('#isOpenRankLi').addClass('disp_none');
+					$('#businessType').html('红包');
+					$('#calculateModeLi').after('<li><label>活动预算:</label><span>'+amountFen2Yuan(result.data.marketBudget,2)+'</span>元</li>'+
+							'<li><label>红包金额:</label><span>'+amountFen2Yuan(result.data.fixedFavourAmt,2)+'</span>元</li>'+
+							'<li><label>红包数量:</label><span>'+result.data.makeNum+'</span>个</li>'+
+							'<li><label>活动预算余额:</label><span>'+amountFen2Yuan((result.data.marketBudget-result.data.totalUseAmt),2)+'</span>元</li>'+
+							'<li><label>预算阈值:</label><span>'+amountFen2Yuan(result.data.threshold,2)+'</span>元</li>');
+					
+				}
+				
+				
+				
+		}
+	});
+	})
+
+</script>
+</html>

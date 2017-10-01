@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+.float-left{
+	float: left;
+}
+.float-right{
+	float: right;
+}
+.hint{
+	margin-top: 7px;
+	margin-left: 5px;
+}
+.searchable-select{
+	width:75%;
+	float:left;
+}
+.searchable-select-holder{
+	border-radius: 0px !important;
+}
+.searchable-select-dropdown{
+	z-index: 100;
+}
+.error-hint{
+	color:red;
+	text-align: center;
+}
+.input-disabled{
+	color: #848484 !important;
+    background-color: #eee !important;
+}
+.modal.fade.in{
+	top:10% !important;
+}
